@@ -22,6 +22,11 @@ class Router
         $currentUrl = $_SERVER['REQUEST_URI'] === '' ? '/' :  $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
 
+          if ($_SERVER['PATH_INFO']) {
+    $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+ } else {
+    $currentUrl = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'];
+ }
         // if ($method === 'GET') {
         //     $fn = $this->getRoutes[$currentUrl] ?? null;
         // } else {
@@ -44,11 +49,6 @@ class Router
             echo "Página No Encontrada o Ruta no válida";
         }
     }
-    if ($_SERVER['PATH_INFO']) {
-    $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
- } else {
-    $currentUrl = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'];
- }
 
     public function render($view, $datos = [])
     {
